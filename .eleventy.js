@@ -9,6 +9,8 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toFormat(format);
   });
 
+  eleventyConfig.addPassthroughCopy("style.css");
+
   // Return your Object options:
   return {
     dir: {
