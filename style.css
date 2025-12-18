@@ -34,6 +34,49 @@ header h1 a {
     color: #333;
 }
 
+/* Featured Post */
+.featured-post {
+    background: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.featured-post h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.featured-post p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+/* Post Grid */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.post-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.post-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
 /* Main content */
 main {
     max-width: 960px;
