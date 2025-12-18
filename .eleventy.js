@@ -1,6 +1,12 @@
+const { DateTime } = require("luxon");
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("post", function(collectionApi) {
     return collectionApi.getFilteredByGlob("posts/**/*.md");
+  });
+
+  eleventyConfig.addFilter("date", (dateObj, format = "dd LLL yyyy") => {
+    return DateTime.fromJSDate(dateObj).toFormat(format);
   });
 
   // Return your Object options:
