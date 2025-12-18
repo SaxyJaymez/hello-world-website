@@ -19,7 +19,7 @@ a:hover {
 
 /* Header */
 header {
-    background: #000;
+    background: #1a1a1a; /* Changed header background to match body */
     padding: 1rem 1rem; /* Added padding to the header */
     border-bottom: 1px solid #333;
     display: flex;
@@ -33,11 +33,11 @@ header h1 {
 }
 
 header h1 a {
-    color: #f5d547; /* Changed header h1 a color to yellow */
+    color: #fff; /* Changed header h1 a color to white */
 }
 
 .logo a {
-    color: #f5d547;
+    color: #fff; /* Changed logo a color to white */
     font-size: 2rem;
     font-weight: bold;
 }
@@ -54,7 +54,7 @@ nav li {
 }
 
 nav a {
-    color: #f5d547; /* Changed nav a color to yellow */
+    color: #fff; /* Changed nav a color to white */
     font-size: 1.1rem;
 }
 
