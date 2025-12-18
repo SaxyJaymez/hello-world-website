@@ -3,17 +3,12 @@ layout: base.njk
 title: Home
 ---
 
----
-layout: base.njk
-title: Home
----
-
-{% set featuredPost = collections.post | last %}
+{% assign featuredPost = collections.post | last %}
 
 <div class="featured-post">
     <a href="{{ featuredPost.url }}">
         <h2>{{ featuredPost.data.title }}</h2>
-        <p>{{ featuredPost.templateContent | truncate(150) }}</p>
+        <p>{{ featuredPost.templateContent | truncatewords: 20 }}</p>
     </a>
 </div>
 
@@ -23,7 +18,7 @@ title: Home
     <div class="post-card">
         <a href="{{ post.url }}">
             <h3>{{ post.data.title }}</h3>
-            <p>{{ post.templateContent | truncate(80) }}</p>
+            <p>{{ post.templateContent | truncatewords: 10 }}</p>
         </a>
     </div>
     {% endif %}
