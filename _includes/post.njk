@@ -1,0 +1,9 @@
+---
+layout: base.njk
+---
+
+<article>
+    <h2>{{ title }}</h2>
+    <p><em>{{ date | date: "%Y-%m-%d" }}</em></p>
+    {{ content | safe }}
+</article>
