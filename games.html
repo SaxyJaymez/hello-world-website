@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="editor.js"></script>
 </head>
 <body>
     <div id="terminal"></div>
@@ -17,16 +18,19 @@
         term.open(document.getElementById('terminal'));
 
         let current_line = '';
+        const files = {
+            'welcome.txt': 'Welcome to the terminal!\n\nThis is a simple text editor with Emacs-like keybindings.\n\nPress Ctrl-X to save and exit.'
+        };
 
         const commands = {
             help: () => {
-                term.write('\r\nCommands: help, ls, cd, echo, clear, starwars\r\n');
+                term.write('\r\nCommands: help, ls, cd, echo, clear, starwars, edit\r\n');
             },
             clear: () => {
                 term.clear();
             },
             ls: () => {
-                term.write('\r\n');
+                term.write('\r\n' + Object.keys(files).join('  '));
             },
             cd: (dir) => {
                 if (dir === '..') {
@@ -80,11 +84,32 @@
                 };
                 term.clear();
                 crawl();
+            },
+            edit: (file) => {
+                if (!file) {
+                    term.write('\r\nUsage: edit <filename>');
+                    return;
+                }
+                const onExit = (content) => {
+                    files[file] = content;
+                    term.clear();
+                    term.write('$ ');
+                    attachOnKeyHandler();
+                };
+                if (onKeyHandler) {
+                    onKeyHandler.dispose();
+                }
+                const editor = new Editor(term, file, onExit);
+                if (files[file]) {
+                    editor.buffer = files[file].split('\n');
+                }
+                editor.render();
             }
         };
 
+        let onKeyHandler;
         const attachOnKeyHandler = () => {
-            term.onKey(({ key, domEvent }) => {
+            onKeyHandler = term.onKey(({ key, domEvent }) => {
                 if (domEvent.keyCode === 13) { // Enter
                     if (current_line) {
                         const [command, ...args] = current_line.split(' ');
@@ -113,8 +138,5 @@
         term.write('$ ');
 
     </script>
-</body>
-</html>
-
 </body>
 </html>

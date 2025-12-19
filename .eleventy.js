@@ -11,6 +11,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("games.html");
+  eleventyConfig.addPassthroughCopy("editor.js");
 
   // Return your Object options:
   return {
