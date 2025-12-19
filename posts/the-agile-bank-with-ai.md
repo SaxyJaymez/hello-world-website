@@ -4,8 +4,6 @@ date: "2025-12-18"
 layout: "post.njk"
 ---
 
-## The Agile Bank: How AI is Fueling the Next Wave of Innovation
-
 In today's fast-paced digital world, banks are under pressure to innovate and adapt more quickly than ever before. The traditional, slow-moving banking model is no longer sustainable. To survive and thrive, banks must embrace agility.
 
 But what does it mean to be an "agile bank"? And how can artificial intelligence (AI) help banks to achieve this goal?
