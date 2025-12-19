@@ -2,7 +2,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    color: #E0E0E0; /* Changed body text color for better contrast */
+    color: #fff; /* Changed body text color to white */
     margin: 0;
     padding: 0;
     background: #1a1a1a;
@@ -75,7 +75,7 @@ nav a {
 .featured-post p {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: #E0E0E0;
+    color: #fff; /* Changed featured post paragraph color to white */
 }
 
 /* Post Grid */
@@ -100,7 +100,7 @@ nav a {
 .post-card p {
     font-size: 1rem;
     line-height: 1.6;
-    color: #E0E0E0;
+    color: #fff; /* Changed post card paragraph color to white */
 }
 
 /* Main content */
@@ -131,7 +131,7 @@ li a {
 
 li p {
     margin-top: 0.5rem;
-    color: #E0E0E0;
+    color: #fff; /* Changed list item paragraph color to white */
 }
 
 /* Blog post */
@@ -148,28 +148,30 @@ li p {
 }
 
 .post-meta {
-    color: #E0E0E0;
+    color: #fff; /* Changed post meta color to white */
     margin-bottom: 2rem;
 }
 
 .post-content {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: #E0E0E0;
+    color: #fff; /* Changed post content color to white */
 }
 
 article h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: #fff; /* Changed article h2 color to white */
 }
 
 article p {
     font-size: 1.1rem;
     line-height: 1.8;
+    color: #fff; /* Changed article p color to white */
 }
 
 article em {
-    color: #666;
+    color: #fff; /* Changed article em color to white */
     display: block;
     margin-bottom: 2rem;
 }
