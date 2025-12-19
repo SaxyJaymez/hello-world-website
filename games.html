@@ -3,13 +3,123 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sudoku-gen@1.2.0/dist/sudoku-gen.min.js"></script>
 </head>
 <body>
     <div id="terminal"></div>
-    <script>
-        const term = new Terminal();
+    <script type="module">
+        const term = new Terminal({
+            cursorBlink: true,
+            theme: {
+                background: '#1a1a1a',
+                foreground: '#fff',
+            }
+        });
         term.open(document.getElementById('terminal'));
-        term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ');
+
+        let current_line = '';
+        const commands = {
+            help: () => {
+                term.write('\r\nCommands: help, ls, cd, echo, sudoku\r\n');
+            },
+            ls: () => {
+                term.write('\r\nprojects  work-experience  hobbies');
+            },
+            cd: (dir) => {
+                if (dir === '..') {
+                    // no-op
+                } else if (dir) {
+                    term.write(`\r\ncd: no such directory: ${dir}`);
+                }
+            },
+            echo: (arg) => {
+                term.write(`\r\n${arg}`);
+            },
+            sudoku: () => {
+                term.write('\r\nStarting Sudoku...\r\n');
+                const puzzle = sudokuGen.getSudoku('easy');
+                const solution = puzzle.solution;
+                let current_puzzle = puzzle.puzzle;
+
+                const print_puzzle = () => {
+                    term.write('\r\n');
+                    for (let i = 0; i < 9; i++) {
+                        if (i % 3 === 0) {
+                            term.write('-------------------------\r\n');
+                        }
+                        let row = '';
+                        for (let j = 0; j < 9; j++) {
+                            if (j % 3 === 0) {
+                                row += '| ';
+                            }
+                            row += current_puzzle[i*9+j] + ' ';
+                        }
+                        term.write(row + '|\r\n');
+                    }
+                    term.write('-------------------------\r\n');
+                }
+
+                print_puzzle();
+
+                term.write('Enter row, col, and value (e.g. 1,1,5): ');
+                term.onData(e => {
+                    if (e === '\r') { // Enter
+                        const parts = current_line.split(',');
+                        if (parts.length === 3) {
+                            const row = parseInt(parts[0]) - 1;
+                            const col = parseInt(parts[1]) - 1;
+                            const value = parseInt(parts[2]);
+
+                            if (row >= 0 && row < 9 && col >= 0 && col < 9 && value >= 1 && value <= 9) {
+                                if (solution[row*9+col] === value) {
+                                    current_puzzle[row*9+col] = value;
+                                    print_puzzle();
+                                } else {
+                                    term.write('\r\nIncorrect value!\r\n');
+                                }
+                            } else {
+                                term.write('\r\nInvalid input!\r\n');
+                            }
+                        }
+                        current_line = '';
+                        term.write('Enter row, col, and value (e.g. 1,1,5): ');
+                    } else if (e === '\x7F') { // Backspace
+                        current_line = current_line.slice(0, -1);
+                        term.write('\b \b');
+                    } else {
+                        current_line += e;
+                        term.write(e);
+                    }
+                });
+
+            }
+        };
+
+        term.onKey(({ key, domEvent }) => {
+            if (domEvent.keyCode === 13) { // Enter
+                if (current_line) {
+                    const [command, ...args] = current_line.split(' ');
+                    if (commands[command]) {
+                        commands[command](...args);
+                    } else {
+                        term.write(`\r\n-bash: ${command}: command not found`);
+                    }
+                    current_line = '';
+                }
+                term.write('\r\n$ ');
+            } else if (domEvent.keyCode === 8) { // Backspace
+                if (current_line) {
+                    current_line = current_line.slice(0, -1);
+                    term.write('\b \b');
+                }
+            } else {
+                current_line += key;
+                term.write(key);
+            }
+        });
+
+        term.write('$ ');
+
     </script>
 </body>
 </html>
