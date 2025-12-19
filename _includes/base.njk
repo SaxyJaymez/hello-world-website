@@ -21,9 +21,12 @@
         </nav>
     </header>
     <div class="container">
-        <main>
-            {{ content | safe }}
-        </main>
+        <div class="main-container">
+            {% include 'timeline.njk' %}
+            <main>
+                {{ content | safe }}
+            </main>
+        </div>
     </div>
 </body>
 </html>
