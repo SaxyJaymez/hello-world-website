@@ -18,7 +18,7 @@
         term.open(document.getElementById('terminal'));
 
         let current_line = '';
-        let sudoku_handler = null;
+        let onKeyHandler = null;
 
         const commands = {
             help: () => {
@@ -42,6 +42,11 @@
             },
             sudoku: () => {
                 term.write('\r\nStarting Sudoku...\r\n');
+                if (onKeyHandler) {
+                    onKeyHandler.dispose();
+                    onKeyHandler = null;
+                }
+
                 const puzzle = sudoku.getSudoku({difficulty: 'easy'});
                 const solution = puzzle.solution;
                 let current_puzzle = puzzle.puzzle;
@@ -67,13 +72,11 @@
                 print_puzzle();
                 term.write('Enter row, col, and value (e.g. 1,1,5) or type "exit" to quit: ');
 
-                sudoku_handler = term.onData(e => {
+                const sudoku_handler = term.onData(e => {
                     if (e === '\r') { // Enter
                         if (current_line === 'exit') {
-                            if (sudoku_handler) {
-                                sudoku_handler.dispose();
-                                sudoku_handler = null;
-                            }
+                            sudoku_handler.dispose();
+                            attachOnKeyHandler();
                             term.write('\r\n$ ');
                             current_line = '';
                             return;
@@ -109,34 +112,37 @@
             }
         };
 
-        term.onKey(({ key, domEvent }) => {
-            if (sudoku_handler) {
-                return;
-            }
-            if (domEvent.keyCode === 13) { // Enter
-                if (current_line) {
-                    const [command, ...args] = current_line.split(' ');
-                    if (commands[command]) {
-                        commands[command](...args);
-                    } else {
-                        term.write(`\r\n-bash: ${command}: command not found`);
+        const attachOnKeyHandler = () => {
+            onKeyHandler = term.onKey(({ key, domEvent }) => {
+                if (domEvent.keyCode === 13) { // Enter
+                    if (current_line) {
+                        const [command, ...args] = current_line.split(' ');
+                        if (commands[command]) {
+                            commands[command](...args);
+                        } else {
+                            term.write(`\r\n-bash: ${command}: command not found`);
+                        }
+                        current_line = '';
                     }
-                    current_line = '';
+                    term.write('\r\n$ ');
+                } else if (domEvent.keyCode === 8) { // Backspace
+                    if (current_line) {
+                        current_line = current_line.slice(0, -1);
+                        term.write('\b \b');
+                    }
+                } else {
+                    current_line += key;
+                    term.write(key);
                 }
-                term.write('\r\n$ ');
-            } else if (domEvent.keyCode === 8) { // Backspace
-                if (current_line) {
-                    current_line = current_line.slice(0, -1);
-                    term.write('\b \b');
-                }
-            } else {
-                current_line += key;
-                term.write(key);
-            }
-        });
+            });
+        }
+        attachOnKeyHandler();
 
         term.write('$ ');
 
     </script>
+</body>
+</html>
+
 </body>
 </html>
