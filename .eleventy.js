@@ -10,6 +10,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addPassthroughCopy("style.css");
+  eleventyConfig.addPassthroughCopy("games.html");
 
   // Return your Object options:
   return {
