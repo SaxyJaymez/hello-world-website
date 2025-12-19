@@ -60,7 +60,6 @@ nav a {
 
 /* Featured Post */
 .featured-post {
-    background: #fff;
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 5px;
@@ -70,11 +69,13 @@ nav a {
 .featured-post h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: #fff;
 }
 
 .featured-post p {
     font-size: 1.2rem;
     line-height: 1.8;
+    color: #E0E0E0;
 }
 
 /* Post Grid */
@@ -85,7 +86,6 @@ nav a {
 }
 
 .post-card {
-    background: #fff;
     padding: 1.5rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -94,11 +94,13 @@ nav a {
 .post-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: #fff;
 }
 
 .post-card p {
     font-size: 1rem;
     line-height: 1.6;
+    color: #E0E0E0;
 }
 
 /* Main content */
@@ -115,7 +117,6 @@ ul {
 }
 
 li {
-    background: #fff;
     padding: 1.5rem;
     margin-bottom: 1rem;
     border-radius: 5px;
@@ -125,16 +126,16 @@ li {
 li a {
     font-size: 1.5rem;
     font-weight: bold;
+    color: #f5d547;
 }
 
 li p {
     margin-top: 0.5rem;
-    color: #666;
+    color: #E0E0E0;
 }
 
 /* Blog post */
 .post {
-    background: #fff;
     padding: 2rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -143,16 +144,18 @@ li p {
 .post-title {
     font-size: 3rem;
     margin-bottom: 1rem;
+    color: #fff;
 }
 
 .post-meta {
-    color: #666;
+    color: #E0E0E0;
     margin-bottom: 2rem;
 }
 
 .post-content {
     font-size: 1.2rem;
     line-height: 1.8;
+    color: #E0E0E0;
 }
 
 article h2 {
