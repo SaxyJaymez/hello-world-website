@@ -22,7 +22,10 @@
 
         const commands = {
             help: () => {
-                term.write('\r\nCommands: help, ls, cd, echo, sudoku\r\n');
+                term.write('\r\nCommands: help, ls, cd, echo, sudoku, clear\r\n');
+            },
+            clear: () => {
+                term.clear();
             },
             ls: () => {
                 term.write('\r\nprojects  work-experience  hobbies');
