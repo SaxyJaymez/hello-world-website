@@ -18,6 +18,8 @@
         term.open(document.getElementById('terminal'));
 
         let current_line = '';
+        let sudoku_handler = null;
+
         const commands = {
             help: () => {
                 term.write('\r\nCommands: help, ls, cd, echo, sudoku\r\n');
@@ -37,7 +39,7 @@
             },
             sudoku: () => {
                 term.write('\r\nStarting Sudoku...\r\n');
-                const puzzle = sudokuGen.getSudoku('easy');
+                const puzzle = sudoku.getSudoku({difficulty: 'easy'});
                 const solution = puzzle.solution;
                 let current_puzzle = puzzle.puzzle;
 
@@ -60,10 +62,20 @@
                 }
 
                 print_puzzle();
+                term.write('Enter row, col, and value (e.g. 1,1,5) or type "exit" to quit: ');
 
-                term.write('Enter row, col, and value (e.g. 1,1,5): ');
-                term.onData(e => {
+                sudoku_handler = term.onData(e => {
                     if (e === '\r') { // Enter
+                        if (current_line === 'exit') {
+                            if (sudoku_handler) {
+                                sudoku_handler.dispose();
+                                sudoku_handler = null;
+                            }
+                            term.write('\r\n$ ');
+                            current_line = '';
+                            return;
+                        }
+
                         const parts = current_line.split(',');
                         if (parts.length === 3) {
                             const row = parseInt(parts[0]) - 1;
@@ -82,7 +94,7 @@
                             }
                         }
                         current_line = '';
-                        term.write('Enter row, col, and value (e.g. 1,1,5): ');
+                        term.write('Enter row, col, and value (e.g. 1,1,5) or type "exit" to quit: ');
                     } else if (e === '\x7F') { // Backspace
                         current_line = current_line.slice(0, -1);
                         term.write('\b \b');
@@ -91,11 +103,13 @@
                         term.write(e);
                     }
                 });
-
             }
         };
 
         term.onKey(({ key, domEvent }) => {
+            if (sudoku_handler) {
+                return;
+            }
             if (domEvent.keyCode === 13) { // Enter
                 if (current_line) {
                     const [command, ...args] = current_line.split(' ');
