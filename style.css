@@ -2,14 +2,15 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    color: #fff; /* Changed body text color to white */
+    color: #333; /* Dark gray for text */
     margin: 0;
     padding: 0;
-    background: #1a1a1a;
+    background: #f9f9f9; /* Light gray background */
 }
 
 a {
     text-decoration: none;
+    color: #007aff; /* Apple's blue for links */
 }
 
 a:hover {
@@ -18,9 +19,9 @@ a:hover {
 
 /* Header */
 header {
-    background: #1a1a1a; /* Changed header background to match body */
-    padding: 1rem 1rem; /* Added padding to the header */
-    border-bottom: 1px solid #333;
+    background: #fff; /* White header */
+    padding: 1rem 2rem; /* Increased padding */
+    border-bottom: 1px solid #e5e5e5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,17 +29,18 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 600;
 }
 
 header h1 a {
-    color: #fff; /* Changed header h1 a color to white */
+    color: #333;
 }
 
 .logo a {
-    color: #fff; /* Changed logo a color to white */
-    font-size: 2rem;
-    font-weight: bold;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 nav ul {
@@ -53,63 +55,107 @@ nav li {
 }
 
 nav a {
-    color: #fff; /* Changed nav a color to white */
-    font-size: 1.1rem;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+
 /* Featured Post */
+.featured-post {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
 .featured-post a {
-    color: #fff;
+    color: #333;
+}
+
+.featured-post h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Post Grid */
-.post-grid a {
-    color: #fff;
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
-/* Blog post list */
-li a {
-    color: #fff;
+.post-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+.post-card a {
+    display: block;
+    padding: 1.5rem;
+    color: #333;
+}
+
+.post-card h3 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Blog post */
 .post {
+    background: #fff;
     padding: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .post-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: #333;
 }
 
 .post-meta {
-    color: #fff; /* Changed post meta color to white */
+    color: #666; /* Lighter gray for meta text */
     margin-bottom: 2rem;
 }
 
 .post-content {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #fff; /* Changed post content color to white */
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
 }
 
 article h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
-    color: #fff; /* Changed article h2 color to white */
+    color: #333;
 }
 
 article p {
     font-size: 1.1rem;
-    line-height: 1.8;
-    color: #fff; /* Changed article p color to white */
+    line-height: 1.7;
+    color: #333;
 }
 
 article em {
-    color: #fff; /* Changed article em color to white */
+    color: #666;
     display: block;
     margin-bottom: 2rem;
 }
@@ -119,9 +165,6 @@ article em {
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
 }
 
 main {
@@ -130,14 +173,15 @@ main {
 
 /* Timeline styles */
 .timeline {
-    border-right: 1px solid #333;
-    padding-right: 2rem;
+    border-right: none; /* Remove border */
+    padding-right: 0;
 }
 
 .timeline h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: #333;
+    font-weight: 600;
 }
 
 .timeline ul {
@@ -150,8 +194,8 @@ main {
 }
 
 .timeline a {
-    font-weight: bold;
-    color: #fff;
+    font-weight: 500;
+    color: #333;
 }
 
 .timeline span {
