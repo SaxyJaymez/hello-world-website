@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="editor.js"></script>
+</head>
+<body>
+    <div id="terminal"></div>
+    <script type="module">
+        const term = new Terminal({
+            cursorBlink: true,
+            theme: {
+                background: '#1a1a1a',
+                foreground: '#fff',
+            }
+        });
+        term.open(document.getElementById('terminal'));
+
+        let current_line = '';
+        const files = {
+            'welcome.txt': 'Welcome to the terminal!\n\nThis is a simple text editor with Emacs-like keybindings.\n\nPress Ctrl-X to save and exit.'
+        };
+
+        const commands = {
+            help: () => {
+                term.write('\r\nCommands: help, ls, cd, echo, clear, starwars, edit\r\n');
+            },
+            clear: () => {
+                term.clear();
+            },
+            ls: () => {
+                term.write('\r\n' + Object.keys(files).join('  '));
+            },
+            cd: (dir) => {
+                if (dir === '..') {
+                    // no-op
+                } else if (dir) {
+                    term.write(`\r\ncd: no such directory: ${dir}`);
+                }
+            },
+            echo: (arg) => {
+                term.write(`\r\n${arg}`);
+            },
+            starwars: () => {
+                const text = [
+                    'A long time ago in a galaxy far, far away....',
+                    '',
+                    'Episode IV',
+                    'A NEW HOPE',
+                    '',
+                    'It is a period of civil war.',
+                    'Rebel spaceships, striking',
+                    'from a hidden base, have won',
+                    'their first victory against',
+                    'the evil Galactic Empire.',
+                    '',
+                    'During the battle, Rebel',
+                    'spies managed to steal secret',
+                    "plans to the Empire's",
+                    'ultimate weapon, the DEATH',
+                    'STAR, an armored space',
+                    'station with enough power to',
+                    'destroy an entire planet.',
+                    '',
+                    'Pursued by the Empire\'s',
+                    'sinister agents, Princess',
+                    'Leia races home aboard her',
+                    'starship, custodian of the',
+                    'stolen plans that can save',
+                    'her people and restore',
+                    'freedom to the galaxy....'
+                ];
+
+                let i = 0;
+                const crawl = () => {
+                    if (i < text.length) {
+                        term.writeln(text[i]);
+                        i++;
+                        setTimeout(crawl, 100);
+                    } else {
+                        term.write('\r\n$ ');
+                    }
+                };
+                term.clear();
+                crawl();
+            },
+            edit: (file) => {
+                if (!file) {
+                    term.write('\r\nUsage: edit <filename>');
+                    return;
+                }
+                const onExit = (content) => {
+                    files[file] = content;
+                    term.clear();
+                    term.write('$ ');
+                    attachOnKeyHandler();
+                };
+                if (onKeyHandler) {
+                    onKeyHandler.dispose();
+                }
+                const editor = new Editor(term, file, onExit);
+                if (files[file]) {
+                    editor.buffer = files[file].split('\n');
+                }
+                editor.render();
+            }
+        };
+
+        let onKeyHandler;
+        const attachOnKeyHandler = () => {
+            onKeyHandler = term.onKey(({ key, domEvent }) => {
+                if (domEvent.keyCode === 13) { // Enter
+                    if (current_line) {
+                        const [command, ...args] = current_line.split(' ');
+                        if (commands[command]) {
+                            commands[command](...args);
+                        } else {
+                            term.write(`\r\n-bash: ${command}: command not found`);
+                        }
+                        current_line = '';
+                    } else {
+                        term.write('\r\n$ ');
+                    }
+                } else if (domEvent.keyCode === 8) { // Backspace
+                    if (current_line) {
+                        current_line = current_line.slice(0, -1);
+                        term.write('\b \b');
+                    }
+                } else {
+                    current_line += key;
+                    term.write(key);
+                }
+            });
+        }
+        attachOnKeyHandler();
+
+        term.write('$ ');
+
+    </script>
+</body>
+</html>

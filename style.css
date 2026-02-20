@@ -1,0 +1,162 @@
+/* Basic styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #fff; /* Changed body text color to white */
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+header {
+    background: #1a1a1a; /* Changed header background to match body */
+    padding: 1rem 1rem; /* Added padding to the header */
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header h1 a {
+    color: #fff; /* Changed header h1 a color to white */
+}
+
+.logo a {
+    color: #fff; /* Changed logo a color to white */
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav li {
+    margin-left: 1.5rem;
+}
+
+nav a {
+    color: #fff; /* Changed nav a color to white */
+    font-size: 1.1rem;
+}
+
+/* Featured Post */
+.featured-post a {
+    color: #fff;
+}
+
+/* Post Grid */
+.post-grid a {
+    color: #fff;
+}
+
+/* Blog post list */
+li a {
+    color: #fff;
+}
+
+/* Blog post */
+.post {
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.post-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.post-meta {
+    color: #fff; /* Changed post meta color to white */
+    margin-bottom: 2rem;
+}
+
+.post-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #fff; /* Changed post content color to white */
+}
+
+article h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff; /* Changed article h2 color to white */
+}
+
+article p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #fff; /* Changed article p color to white */
+}
+
+article em {
+    color: #fff; /* Changed article em color to white */
+    display: block;
+    margin-bottom: 2rem;
+}
+
+/* Main container for two-column layout */
+.main-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+main {
+    max-width: 960px;
+}
+
+/* Timeline styles */
+.timeline {
+    border-right: 1px solid #333;
+    padding-right: 2rem;
+}
+
+.timeline h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.timeline ul {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline li {
+    margin-bottom: 1rem;
+}
+
+.timeline a {
+    font-weight: bold;
+    color: #fff;
+}
+
+.timeline span {
+    display: block;
+    font-size: 0.9rem;
+    color: #999;
+}
+
